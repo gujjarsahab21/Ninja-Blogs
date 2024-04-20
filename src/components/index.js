@@ -2,7 +2,7 @@
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import Container from './container/Container'
-import Logo from './logo'
+import Logo from './Logo.jsx'
 import LogoutBtn from './Header/LogoutBtn'
 import RTE from './RTE'
 import Signup from './Signup'
@@ -31,4 +31,3 @@ export {
     AuthLayout,
     Select
 } 
-//2 go to app.jsx

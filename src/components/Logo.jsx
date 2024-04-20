@@ -1,5 +1,5 @@
 import React from "react";
-import icon from './ninja.png'; // Import the icon image file
+import icon from './ninja.png'; 
 
 function Logo({ width = '140px' }) {
     return (
