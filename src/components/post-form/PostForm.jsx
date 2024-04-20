@@ -1,12 +1,3 @@
-// ab ham is form ko reuse krne wale h to values kaha se ayegi jo bhi is form ko use krega wo pass krega is wajah se postform ke bracket me post ayega 
-// agr post h to title use krlejeye aur agr nhi to empty rkh dena same for slug,content,status
-// userdata state k andr rkha hua h useselector lake dega
-// ek submit naam ka form banate h 2 cheeze ayegi samne phle to ya to post ki value hai phle he agr hai to update kro aur dusri nhi h to ek nyi entry create kro
-// update me sbse phla kaam file ko handle krenge with uplaodFile method
-// purani image dlt bhi krni pdegi
-//slugtransform
-//2 field h hamare pas title aur slug, title ko watch krna aur slug k andr values generate krni hai agr kahi bhi user space deta h to us space ko covert krna h dash me
-//apne ek useeffect liya waha ek method call kiya to aap usko optimize kese kr skte ho to apne ko ans krna h usko ek variable me store krlo aur return ke andr ek callback kr skte ho aur usko unsubscribe kr skte ho mem management ho jaye
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "..";
@@ -18,7 +9,7 @@ export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
-            slug: post?.$id || "",
+            slug: post?.slug || "", // Use post?.slug instead of post?.$id
             content: post?.content || "",
             status: post?.status || "active",
         },
@@ -32,10 +23,10 @@ export default function PostForm({ post }) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
             if (file) {
-                appwriteService.deleteFile(post.featuredImage);
+                appwriteService.deleteFile(post?.featuredImage); // Use optional chaining here
             }
 
-            const dbPost = await appwriteService.updatePost(post.$id, {
+            const dbPost = await appwriteService.updatePost(post?.$id, { // Use optional chaining here
                 ...data,
                 featuredImage: file ? file.$id : undefined,
             });
